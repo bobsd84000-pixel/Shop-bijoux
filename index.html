@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Shop — Bijoux et accessoires</title>
+<style>
+:root {
+  --bg: #0a0a0a;
+  --card: #171717;
+  --line: #262626;
+  --txt: #fff;
+  --sub: #a3a3a3;
+  --mute: #737373;
+  --tab: #171717;
+  --tabOn: #fff;
+  --tabOnTxt: #171717;
+  --badge: #451a03;
+  --badgeTxt: #fcd34d;
+}
+
+[data-theme="light"] {
+  --bg: #fff;
+  --card: #fff;
+  --line: #e5e5e5;
+  --txt: #171717;
+  --sub: #737373;
+  --mute: #a3a3a3;
+  --tab: #f5f5f5;
+  --tabOn: #171717;
+  --tabOnTxt: #fff;
+  --badge: #fffbeb;
+  --badgeTxt: #b45309;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--txt);
+  transition: background 0.2s, color 0.2s;
+}
+
+.wrap {
+  max-width: 1152px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+header .wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+h1 {
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.theme {
+  border: 0;
+  border-radius: 10px;
+  padding: 8px 10px;
+  background: var(--tab);
+  color: var(--txt);
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.hero {
+  padding-top: 48px;
+  padding-bottom: 24px;
+}
+
+.hero h2 {
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
+
+.hero p {
+  color: var(--sub);
+  font-size: 15px;
+}
+
+nav {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 24px;
+}
+
+nav button {
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 10px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  background: var(--tab);
+  color: var(--sub);
+  cursor: pointer;
+}
+
+nav button.on {
+  background: var(--tabOn);
+  color: var(--tabOnTxt);
+}
+
+.grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr;
+  padding-bottom: 64px;
+}
+
+.grid.cat {
+  gap: 12px;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (min-width: 640px) {
+  .grid.cat {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .grid.cat {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.ph {
+  position: relative;
+  background: linear-gradient(135deg, var(--line) 0%, color-mix(in srgb, var(--line) 80%, transparent) 100%);
+  min-height: 224px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.ph img {
+  display: block;
+  width: 100%;
+  height: 224px;
+  object-fit: cover;
+}
+
+.cat .ph {
+  min-height: 128px;
+}
+
+.cat .ph img {
+  height: 128px;
+}
+
+.badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: var(--badge);
+  color: var(--badgeTxt);
+}
+
+.cat .badge {
+  top: 8px;
+  left: 8px;
+  font-size: 10px;
+  padding: 2px 6px;
+}
+
+.info {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.cat .info {
+  padding: 12px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.top {
+  align-items: flex-start;
+  margin-bottom: 4px;
+}
+
+h3 {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.cat h3 {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.3;
+  min-height: 34px;
+  margin-bottom: 8px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.rate {
+  font-size: 14px;
+  color: var(--sub);
+  white-space: nowrap;
+}
+
+.rate b {
+  color: #fbbf24;
+}
+
+.desc {
+  font-size: 14px;
+  color: var(--sub);
+  margin-bottom: 16px;
+}
+
+.ship {
+  font-size: 12px;
+  color: var(--mute);
+  margin-bottom: 16px;
+}
+
+.price {
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.cat .price {
+  font-size: 15px;
+}
+
+.add {
+  border: 0;
+  border-radius: 10px;
+  background: #4f46e5;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.add:hover {
+  background: #4338ca;
+}
+
+.cat .add {
+  padding: 4px 10px;
+  font-size: 14px;
+}
+
+footer {
+  border-top: 1px solid var(--line);
+  padding: 24px 0 calc(24px + env(safe-area-inset-bottom, 0px));
+  text-align: center;
+  font-size: 13px;
+  color: var(--mute);
+}
+
+button:focus-visible, [role="button"]:focus-visible {
+  outline: 2px solid var(--tabOn);
+  outline-offset: 2px;
+}
+
+.tab:focus-visible {
+  outline: 2px solid var(--tabOn);
+  outline-offset: -4px;
+}
+
+.ph.noimg::after {
+  content: "Photo indisponible";
+  color: var(--sub);
+  font-size: 13px;
+}
+
+.gem-icon {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>
+</head>
+<body>
+<header><div class="wrap"><h1>Shop</h1><button class="theme" id="theme" aria-label="Changer de thème">☀️</button></div></header>
+<section class="wrap hero"><h2>Bijoux et accessoires</h2><p>Colliers, bracelets et bagues fashion</p></section>
+<nav class="wrap" id="tabs"></nav>
+<main class="wrap"><div id="grid" class="grid"></div></main>
+<footer>© 2026 Shop — tous droits réservés</footer>
+
+<script>
+const PRODUCTS = [
+  { id: 1, title: "Collier Croix Argent", category: "colliers", price: 45.99, rating: 4.8, shipping: "Livraison gratuite", badge: "Nouveau", img: "https://images.pexels.com/photos/9432652/pexels-photo-9432652.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop", fb: "https://images.pexels.com/photos/2752462/pexels-photo-2752462.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop", desc: "Pendentif croix en argent sur chaîne fine." },
+  { id: 2, title: "Collier Chaîne Or", category: "colliers", price: 52.50, rating: 4.9, shipping: "Livraison rapide", badge: "Best-seller", img: "https://images.pexels.com/photos/12194265/pexels-photo-12194265.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop", fb: "https://images.pexels.com/photos/16124724/pexels-photo-16124724.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop", desc: "Chaîne dorée classique, maille régulière." },
+  { id: 3, title: "Collier Perle Éternelle", category: "colliers", price: 89.00, rating: 4.9, shipping: "Livraison rapide", badge: "", img: "https://images.pexels.com/photos/11678215/pexels-photo-11678215.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop", fb: "https://images.pexels.com/photos/906056/pexels-photo-906056.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop", desc: "Collier argent rehaussé de perles." },
+  { id: 4, title: "Collier Pendentif Cristal", category: "colliers", price: 39.99, rating: 4.6, shipping: "Livraison gratuite", badge: "Promo", img: "https://images.pexels.com/photos/906056/pexels-photo-906056.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop", fb: "https://images.pexels.com/photos/227574/pexels-photo-227574.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop", desc: "Cristal brut suspendu à une chaîne fine." },
+  { id: 5, title: "Collier Pierre Verte Vintage", category: "colliers", price: 67.99, rating: 4.7, shipping: "Livraison offerte dès 50€", badge: "Tendance", img: "https://images.pexels.com/photos/227574/pexels-photo-227574.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop", fb: "https://images.pexels.com/photos/906056/pexels-photo-906056.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop", desc: "Pierre verte sertie, style vintage." },
+  { id: 6, title: "Collier Chaîne Métal", category: "colliers", price: 43.75, rating: 4.5, shipping: "Livraison gratuite", badge: "", img: "https://images.pexels.com/photos/16124724/pexels-photo-16124724.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop", fb: "https://images.pexels.com/photos/12194265/pexels-photo-12194265.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop", desc: "Chaîne métal épurée, look minimaliste." },
+  { id: 7, title: "Collier Croix Figaro", category: "colliers", price: 49.90, rating: 4.6, shipping: "Livraison rapide", badge: "", img: "https://images.pexels.com/photos/2752462/pexels-photo-2752462.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop", fb: "https://images.pexels.com/photos/9432652/pexels-photo-9432652.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop", desc: "Maille Figaro avec croix pendentif." },
+  { id: 8, title: "Bracelet Or Tressé", category: "bracelets", price: 74.99, rating: 4.8, shipping: "Livraison rapide", badge: "Nouveau", img: "https://images.pexels.com/photos/12124662/pexels-photo-12124662.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop", fb: "https://images.pexels.com/photos/12495610/pexels-photo-12495610.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop", desc: "Chaîne dorée tressée, fermoir discret." },
+  { id: 9, title: "Bracelet Maille Royale", category: "bracelets", price: 56.50, rating: 4.7, shipping: "Livraison offerte", badge: "Best-seller", img: "https://images.pexels.com/photos/12495610/pexels-photo-12495610.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop", fb: "https://images.pexels.com/photos/12124662/pexels-photo-12124662.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop", desc: "Grosse maille dorée, effet massif." },
+  { id: 10, title: "Bracelet Argent Brillant", category: "bracelets", price: 95.00, rating: 4.9, shipping: "Livraison rapide", badge: "Tendance", img: "https://images.pexels.com/photos/12026051/pexels-photo-12026051.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop", fb: "https://images.pexels.com/photos/16304539/pexels-photo-16304539.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop", desc: "Bracelet argent serti de brillants." },
+  { id: 11, title: "Bracelet Argent Porté", category: "bracelets", price: 49.99, rating: 4.6, shipping: "Livraison gratuite", badge: "", img: "https://images.pexels.com/photos/16304539/pexels-photo-16304539.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop", fb: "https://images.pexels.com/photos/12026051/pexels-photo-12026051.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop", desc: "Bracelet argent fin, tous les jours." },
+  { id: 12, title: "Jonc Argent", category: "bracelets", price: 68.75, rating: 4.6, shipping: "Livraison gratuite", badge: "Promo", img: "https://images.pexels.com/photos/1191536/pexels-photo-1191536.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop", fb: "https://images.pexels.com/photos/16304539/pexels-photo-16304539.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop", desc: "Jonc rigide en métal argenté." },
+  { id: 13, title: "Bracelets Argent Homme", category: "bracelets", price: 55.25, rating: 4.7, shipping: "Livraison rapide", badge: "", img: "https://images.pexels.com/photos/16274920/pexels-photo-16274920.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop", fb: "https://images.pexels.com/photos/1191536/pexels-photo-1191536.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop", desc: "Set bracelets métal argenté, style urbain." },
+  { id: 14, title: "Bague Pierre Rose", category: "bagues", price: 49.99, rating: 4.8, shipping: "Livraison gratuite", badge: "Nouveau", img: "https://images.pexels.com/photos/19132380/pexels-photo-19132380.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop", fb: "https://images.pexels.com/photos/32382386/pexels-photo-32382386.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop", desc: "Grosse pierre rose, monture ciselée." },
+  { id: 15, title: "Bague Argent Perle & Cristal", category: "bagues", price: 79.99, rating: 4.9, shipping: "Livraison rapide", badge: "Best-seller", img: "https://images.pexels.com/photos/1395306/pexels-photo-1395306.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop", fb: "https://images.pexels.com/photos/8398912/pexels-photo-8398912.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop", desc: "Argent, pierre claire et perle blanche." },
+  { id: 16, title: "Bague Fleur Pierres Jaunes", category: "bagues", price: 63.50, rating: 4.6, shipping: "Livraison gratuite", badge: "", img: "https://images.pexels.com/photos/8398912/pexels-photo-8398912.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop", fb: "https://images.pexels.com/photos/1395306/pexels-photo-1395306.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop", desc: "Motif floral, pierres blanches et jaune." },
+  { id: 17, title: "Bague Argent Pierres", category: "bagues", price: 52.00, rating: 4.5, shipping: "Livraison rapide", badge: "Promo", img: "https://images.pexels.com/photos/15684127/pexels-photo-15684127.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop", fb: "https://images.pexels.com/photos/2899839/pexels-photo-2899839.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop", desc: "Fines pierres sur anneau argent." },
+  { id: 18, title: "Bague Rubis", category: "bagues", price: 87.50, rating: 4.8, shipping: "Livraison rapide", badge: "Tendance", img: "https://images.pexels.com/photos/16438670/pexels-photo-16438670.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop", fb: "https://images.pexels.com/photos/32382386/pexels-photo-32382386.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop", desc: "Pierre rouge rubis, entourage brillant." },
+  { id: 19, title: "Bague Solitaire Argent", category: "bagues", price: 98.75, rating: 4.9, shipping: "Livraison offerte", badge: "", img: "https://images.pexels.com/photos/750148/pexels-photo-750148.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop", fb: "https://images.pexels.com/photos/2899839/pexels-photo-2899839.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop", desc: "Solitaire pierre claire sur argent." },
+  { id: 20, title: "Bague Diamants Noir & Blanc", category: "bagues", price: 71.25, rating: 4.7, shipping: "Livraison offerte", badge: "Best-seller", img: "https://images.pexels.com/photos/3266703/pexels-photo-3266703.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop", fb: "https://images.pexels.com/photos/750148/pexels-photo-750148.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop", desc: "Anneau pavé de pierres brillantes." }
+];
+
+function loadFallback(img) {
+  if (img.dataset.fb && !img.dataset.tried) {
+    img.dataset.tried = "1";
+    img.src = img.dataset.fb;
+    return;
+  }
+  img.style.display = "none";
+  img.parentNode.classList.add("noimg");
+}
+
+const CATEGORIES = [
+  { id: "all", name: "Tous les produits" },
+  { id: "colliers", name: "Colliers" },
+  { id: "bracelets", name: "Bracelets" },
+  { id: "bagues", name: "Bagues" }
+];
+
+let currentCat = "all";
+
+document.addEventListener("DOMContentLoaded", () => {
+  initTheme();
+  renderTabs();
+  renderProducts();
+  document.getElementById("theme").addEventListener("click", toggleTheme);
+});
+
+function initTheme() {
+  const isLight = document.documentElement.getAttribute("data-theme") === "light";
+  document.getElementById("theme").textContent = isLight ? "🌙" : "☀️";
+}
+
+function toggleTheme() {
+  const currentTheme = document.documentElement.getAttribute("data-theme");
+  const nextTheme = currentTheme === "light" ? "dark" : "light";
+  document.documentElement.setAttribute("data-theme", nextTheme);
+  document.getElementById("theme").textContent = nextTheme === "light" ? "🌙" : "☀️";
+}
+
+function renderTabs() {
+  const tabsContainer = document.getElementById("tabs");
+  tabsContainer.innerHTML = CATEGORIES.map(cat => `
+    <button class="${cat.id === currentCat ? 'on' : ''}" onclick="switchCategory('${cat.id}')">
+      ${cat.name}
+    </button>
+  `).join("");
+}
+
+function switchCategory(catId) {
+  currentCat = catId;
+  renderTabs();
+  renderProducts();
+}
+
+function renderProducts() {
+  const gridContainer = document.getElementById("grid");
+  const filtered = currentCat === "all" 
+    ? PRODUCTS 
+    : PRODUCTS.filter(p => p.category === currentCat);
+
+  if (currentCat !== "all") {
+    gridContainer.classList.add("cat");
+  } else {
+    gridContainer.classList.remove("cat");
+  }
+
+  if (filtered.length === 0) {
+    gridContainer.innerHTML = `<p style="color:var(--sub);grid-column:1/-1;text-align:center;padding:32px 0;">Aucun produit disponible dans cette catégorie.</p>`;
+    return;
+  }
+
+  gridContainer.innerHTML = filtered.map(p => `
+    <article class="card">
+      <div class="ph">
+        <img src="${p.img}" alt="${p.title}" loading="lazy" referrerpolicy="no-referrer" data-fb="${p.fb}" onerror="loadFallback(this)">
+        ${p.badge ? `<span class="badge">${p.badge}</span>` : ""}
+      </div>
+      <div class="info">
+        <div class="row top">
+          <h3>${p.title}</h3>
+          <span class="rate"><b>★</b> ${p.rating}</span>
+        </div>
+        ${currentCat === "all" ? `<p class="desc">${p.desc}</p>` : ""}
+        ${currentCat === "all" ? `<p class="ship">${p.shipping}</p>` : ""}
+        <div class="row" style="margin-top:auto;">
+          <span class="price">${p.price.toFixed(2)} €</span>
+          <button class="add" aria-label="Ajouter ${p.title} au panier">Ajouter</button>
+        </div>
+      </div>
+    </article>
+  `).join("");
+}
+</script>
+</body>
+</html>
